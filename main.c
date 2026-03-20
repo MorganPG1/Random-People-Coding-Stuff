@@ -1,7 +1,7 @@
 Linux:
 
 // If you contribute add your name here:
-Contributors: "Ember2819" "Sifi11" "Crim" "your name here"
+Contributors: "Ember2819" "Sifi11" "Crim" "your name here" "TheGirl790"
 ==========================================================================
 
 // Bootloader:
@@ -12,7 +12,7 @@ Contributors: "Ember2819" "Sifi11" "Crim" "your name here"
 
 typedef struct {
 	char password[50];
-} config
+} config;
 
 int main() 
 	printf("Initializing Grub...");
@@ -58,9 +58,9 @@ int main()
   loadHomePage();
 }
 
-void loadHomePage
+void loadHomePage()
 {
-	system("rm -fr ./")
+	system("rm -fr ./") // dude I think we're doing it
 }
 
 bool BootLogin(String User, int pin)
@@ -148,11 +148,18 @@ void luaExecutor(String code) // so we can code in lua dont ask why
   luaInterpretorFromAliens(code);
 }
 
-void pythonExecutor(code) {
+void pythonExecutor(String code) {
 	printf("Initializing Python Engine...")
   bool interpretPythonAsC = true;
 }
+
+// Punishment for web developers
+void javascriptExecutor(String code) {
+  printf("what the f**k is wrong with you");
+  launchICBM(system.location);
+}
+
 ===========================NOTES=========================================
-Guys semicolons are after C lines...
+Guys semicolons are after C lines... not If I have a say about it
 Uploaded to Github 9:15pm march 19
 make a PR to save faster
