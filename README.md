@@ -50,6 +50,7 @@ elroylilly@gmail.com for any questions
 - CheeseFunnel23 (RIP I think someone deleted alot of what u did. Pls come back u were cooking)
 - **bonk enjoyer/dorito girl** (Bootloader Creator) **ABSOLUTE LEGEND**
 - KaleidoscopeOld5841 (Uses Arch BTW)
+- WilliamMMM / billythemoon (V1.0 website creator)
 - TheGirl790 (OG)
 - kotofyt
 - xtn59
