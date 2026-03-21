@@ -36,7 +36,7 @@ If you contribute at all in any way to the project, please add your name to the 
 - Sifi11 (Founder)
 - Crim (OG)
 - CheeseFunnel23 (RIP I think someone deleted alot of what u did. Pls come back u were cooking)
-- **bonk enjoyer/dorito girl** (Bootloader Creator)
+- **bonk enjoyer/dorito girl** (Bootloader Creator) **ABSOLUTE LEGEND**
 - KaleidoscopeOld5841 (Uses Arch BTW)
 - TheGirl790 (OG)
 - kotofyt
