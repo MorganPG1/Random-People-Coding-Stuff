@@ -138,7 +138,6 @@ itos:
 
 	mov	bx, 10			;; Decimal counting system
 	mov	byte [di], 0		;; Adding null terminator
-	buffer db 16 dup(0) 	;; DI not initialised yet
 	mov di, buffer + 15
 	dec	di
 .loop:
@@ -170,9 +169,9 @@ INIT_MSG	db "[Boot]: Hello, World!", 0xD, 0xA, 0x0
 PROTECTED_MSG	db "[Boot]: Entering protected mode.", 0xD, 0xA, 0x0
 DISK_ERR_MSG	db "[Boot]: Couldn't read disk: ", 0x0
 DISK_MSG	db "[Boot]: Attempting to read drive.", 0xD, 0xA, 0x0
-PROMPT_MSG	db "What drive to boot from? (1 - This drive, 2 - Next drive, 3 - 0x80)", 0xD, 0xA, 0x0
+PROMPT_MSG	db "What drive to boot from? (1 - This drive, 2 - Next drive, 3 - HDD 1)", 0xD, 0xA, 0x0
 NEWLINE		db 0xA, 0xD, 0x0
-
+buffer db 16 dup(0) 	;; DI not initialised yet
 ;; Data
 
 BOOT_DRIVE	db 0x0
