@@ -14,6 +14,7 @@ static Command commands[] = {
     { "setkeyus", cmd_setkeyus},
     { "setkeyuk", cmd_setkeyuk},
     { "test",  cmd_test  },
+    { "clear", cmd_clear },
 };
 
 static int num_commands = sizeof(commands) / sizeof(commands[0]);
@@ -28,6 +29,7 @@ static void cmd_help(uint8_t color) {
     printf("setkeyswe - Sets keyboard layout to Swedish QWERTY\n", color); // Zorx555 - Keyboard layout commands
     printf("setkeyus - Sets keyboard layout to US QWERTY\n", color);
     printf("setkeyuk - Sets keyboard layout to UK QWERTY", color); // MorganPG1 - Add UK Keyboard layout
+    printf("\nclear  - clear the screen", color); //ember
 }
 
 static void cmd_hello(uint8_t color) {
@@ -70,6 +72,10 @@ static void cmd_setkeyus(uint8_t color) {
 static void cmd_setkeyuk(uint8_t color) {
     set_layout(LAYOUTS[2]); 
     printf("\nKeyboard layout set to UK QWERTY", color);
+}
+
+static void cmd_clear(uint8_t color) {
+    terminal_clear(color);
 }
 // ---- dispatcher ----
 static int streq(unsigned char *a, char *b) {
