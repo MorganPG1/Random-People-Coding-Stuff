@@ -2,6 +2,7 @@
 #include "drivers/vga.h"
 #include "drivers/keyboard.h"
 #include "mem.h"
+#include "terminal/terminal.h"
 
 void _entry()
 {
@@ -23,7 +24,7 @@ void _entry()
         // Rest unprintable
     };
     char UPPERCASE[128] = {
-        0, 27, '1', '2', '3', '4','5','6','7','8','9','0','-','=','\b','\t',
+        0, 27, '!', '@', '#', '$', '%','^','&','*','(',')','_','+','\b','\t',
         'Q','W','E','R','T','Y','U','I','O','P','{','}', '\n', 0,
         'A','S','D','F','G','H','J','K','L',':','"', '~', 0, '|',
         'Z','X','C','V','B','N','M','<','>','?', 0, '*', 0, ' '
@@ -32,10 +33,9 @@ void _entry()
 
     set_layout(DOWNCASE, UPPERCASE);
 
-    while (true) {
-        scancode_t sc = ps2_kb_wfi();
-        putchar(scancode_to_ascii(sc), term_color);
-    }
+    char buff[512];
+
+    input(buff, 512, vga_entry_color(VGA_COLOR_WHITE, VGA_COLOR_GREEN));
 
     /* Hangs forever */
     //for (;;) {}
