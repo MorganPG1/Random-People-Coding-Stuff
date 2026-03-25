@@ -1,9 +1,15 @@
 #include "commands.h"
 #include "colors.h"
+#include "drivers/tables/descriptor_tables.h"
 #include "drivers/keyboard.h"
+#include "drivers/tables/irq/irq.h"
+#include "drivers/tables/irq/timer.h"
+#include "drivers/tables/isr/isr.h"
+#include "drivers/vga.h"
 #include "layouts/kb_layouts.h"
 #include "terminal/terminal.h"
 #include "comos/comos.h"
+#include "mem.h"
 
 
 // The command table
@@ -18,6 +24,9 @@ static Command commands[] = {
     { "version", cmd_version },
     { "chars", cmd_chars },
     { "comos", cmd_comos },
+    { "init_tables", cmd_init_gdtidt },
+    { "send_intr", cmd_send_intr },
+    { "start_timer", cmd_start_timer },
 };
 
 static int num_commands = sizeof(commands) / sizeof(commands[0]);
@@ -35,6 +44,9 @@ static void cmd_help(uint8_t color) {
     printf("version - Show the current version of the operating system\n\n", color); // TheOtterMonarch - Output version of the OS
     printf("chars - Print the available characters\n\n", color);
     printf("comos - Run the .comos scripting language\n\n", color);
+    printf("init_tables - Inits descriptor tables\n", color); // Pumpkicks - Inits the descriptor tables
+    printf("send_intr - Sends an interruption\n", color); // Pumpkicks - Sends the interruption 0x3
+    printf("start_timer - Starts a timer within 50Hz of velocity\n", color); // Pumpkicks - Starts the timer
 }
 
 static void cmd_hello(uint8_t color) {
@@ -60,6 +72,7 @@ static void cmd_contributors(uint8_t color) {
     printf("mckaylap2304\n", color);
     printf("TheOtterMonarch\n", color);
     printf("codecrafter01001\n", color);
+    printf("Pumpkicks\n", color);
 }
 
 static void cmd_setkeyswe(uint8_t color) {
@@ -71,7 +84,6 @@ static void cmd_setkeyus(uint8_t color) {
     set_layout(LAYOUTS[0]); // Changed to work with my layout system
     printf("\nKeyboard layout set to US QWERTY\n", color);
 }
-
 
 static void cmd_setkeyuk(uint8_t color) { // Added by MorganPG1
     set_layout(LAYOUTS[2]); 
@@ -117,6 +129,29 @@ static void cmd_comos(uint8_t color) {
     comos_run(&comos_state, demo);
 }
 
+static void cmd_init_gdtidt(uint8_t color) { // Added by Pumpkicks
+    init_desc_tables();
+    printf("\n", color);
+}
+static void cmd_send_intr(uint8_t color) {
+    /*
+        If the descriptor tables aren't enable. This will reboot the system.
+    */
+    printf("\nSending interruption 0x3", color);
+    asm volatile ("int $0x3");
+}
+static void cmd_start_timer(uint8_t color) {
+    /*
+        Needs idt and gdt
+    */
+
+    printf("\nStarting timer within 50Hz\n", color);
+    init_timer(50);
+}
+static void s(registers_t r) {
+    printf("HERE\n", VGA_COLOR_WHITE);
+}
+
 // ---- dispatcher ----
 static int streq(unsigned char *a, char *b) {
     while (*a && *b) {
@@ -134,5 +169,6 @@ void run_command(unsigned char *input, uint8_t color) {
             return;
         }
     }
-    printf("\nUnknown command. Type 'help' for available commands\n", color);
+    if (strlen(input) != 0) printf("\nUnknown command. Type 'help' for available commands\n", color);
+    else printf("\n", color);
 }
